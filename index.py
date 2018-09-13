@@ -6,6 +6,9 @@ from model import Mensagem
 
 app = Flask(__name__)
 
+def obj_dict(obj):
+    return obj.__dict__
+
 @app.route("/")
 def index():
     return "<h1>Hello World</h1>"
@@ -53,6 +56,28 @@ def consultar_mensagem():
 			retorno["status"] = 1
 			retorno["mensagem_status"] = "Mensagem encontrada"
 			retorno["mensagem"] = mensagem.__dict__
+	return json.dumps(retorno)
+
+@app.route("/consultarporusuario")
+def consultar_mensagem_por_usuario():
+	usuario_id = request.args.get('usuario_id')
+
+	retorno = {}
+	if(usuario_id is None):
+		retorno["status"] = 0
+		retorno["mensagem_status"] = "Parametros invalidos"
+
+	else:	
+		mensagens = Mensagem.carregarPorUsuarioId(usuario_id)
+
+		if mensagens is None:
+			retorno["status"] = 0
+			retorno["mensagem_status"] = "Nenhuma mensagem encontrada"
+
+		else:
+			retorno["status"] = 1
+			retorno["mensagem_status"] = "Mensagens encontradas"
+			retorno["mensagens"] = [ob.__dict__ for ob in mensagens]
 	return json.dumps(retorno)
 
 if __name__ == "__main__":

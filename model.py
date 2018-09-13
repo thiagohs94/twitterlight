@@ -25,3 +25,18 @@ class Mensagem:
 			return Mensagem(result[0][0], result[0][1], result[0][2])
 		else:
 			return None
+
+	@staticmethod
+	def carregarPorUsuarioId(usuario_id):
+		query = "SELECT usuario_id, texto, id FROM mensagem WHERE usuario_id = " + usuario_id;
+
+		con = Conexao()
+		result = con.carregar(query)
+
+		retorno = []
+		if result is not None:
+			for r in result:
+				retorno.append(Mensagem(r[0], r[1], r[2]))
+			return retorno
+		else:
+			return None
