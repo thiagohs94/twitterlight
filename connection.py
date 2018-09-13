@@ -1,6 +1,6 @@
 import os
 import psycopg2
-from config import config
+from urlparse import urlparse
     
 class Conexao:
     def __init__(self):
@@ -8,11 +8,9 @@ class Conexao:
 
     def conectar(self):
         try:
-            host        = os.environ.get('DB_HOST', 'localhost')
-            database    = os.environ.get('DB_DATABASE', 'mensagens')
-            user        = os.environ.get('DB_USER', 'postgres')
-            password    = os.environ.get('DB_PASSWORD', 'postgres')
-            self.conn   = psycopg2.connect(host=host, database=database, user=user, password=password)
+            url = urlparse(os.environ.get('DATABASE_URL', 'postgres://postgres:postgres@localhost:5432/mensagens'))
+            db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
+            self.conn   = psycopg2.connect(db)
             
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
@@ -25,6 +23,7 @@ class Conexao:
     def inserir(self, query):
         self.conectar()
 
+        id = None
         if self.conn is not None:
             cur = self.conn.cursor()
             cur.execute(query)
