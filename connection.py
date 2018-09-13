@@ -1,6 +1,9 @@
 import os
 import psycopg2
-from urlparse import urlparse
+try:
+    from urllib.parse import urlparse
+except ImportError:
+     from urlparse import urlparse
     
 class Conexao:
     def __init__(self):
