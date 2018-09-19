@@ -16,28 +16,25 @@ def posts():
 
 	url_mensagens_user = os.environ.get('USER_MESSAGES_URL', 'https://twitterlight-mensagens.herokuapp.com/consultarporusuario')
 	url_mensagens_user += "?usuario_id=" + usuario_id
-	result = requests.get(url_mensagens_user).content
+	result = requests.get(url_mensagens_user)
+	result_json = json.loads(result.text)
 
-	return result
+	mensagens = None
+
+	if(result_json["status"] == 1):
+		mensagens = result_json["mensagens"]
 
 	retorno = {}
-	if(usuario_id is None):
+	if mensagens is None:
 		retorno["status"] = 0
-		retorno["mensagem_status"] = "Parametros invalidos"
-	else:		
-		mensagem = Mensagem(usuario_id, texto)
-		mensagem.salvar()
+		retorno["mensagem_status"] = "Nenhuma mensagem encontrada"
 
-		if(mensagem.id is None):
-			retorno["status"] = 0
-			retorno["mensagem_status"] = "Mensagem nao enviada"
-
-		else:
-			retorno["status"] = 1
-			retorno["mensagem_status"] = "Mensagem enviada"
-			retorno["mensagem"] = mensagem.__dict__
-
+	else:
+		retorno["status"] = 1
+		retorno["mensagem_status"] = "Mensagens encontradas"
+		retorno["mensagens"] = mensagens
 	return json.dumps(retorno)
+
 
 @app.route("/home")
 def home():
