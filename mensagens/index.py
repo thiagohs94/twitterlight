@@ -60,7 +60,7 @@ def consultar_mensagem():
 
 @app.route("/consultarporusuario")
 def consultar_mensagem_por_usuario():
-	usuario_id = request.args.get('usuario_id')
+	usuario_id = request.args.getlist('usuario_id')
 
 	retorno = {}
 	if(usuario_id is None):
@@ -68,7 +68,7 @@ def consultar_mensagem_por_usuario():
 		retorno["mensagem_status"] = "Parametros invalidos"
 
 	else:	
-		mensagens = Mensagem.carregarPorUsuarioId(usuario_id)
+		mensagens = Mensagem.carregarPorUsuariosIds(usuario_id)
 
 		if mensagens is None:
 			retorno["status"] = 0
@@ -79,6 +79,7 @@ def consultar_mensagem_por_usuario():
 			retorno["mensagem_status"] = "Mensagens encontradas"
 			retorno["mensagens"] = [ob.__dict__ for ob in mensagens]
 	return json.dumps(retorno)
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))

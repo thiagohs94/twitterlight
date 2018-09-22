@@ -27,8 +27,16 @@ class Mensagem:
 			return None
 
 	@staticmethod
-	def carregarPorUsuarioId(usuario_id):
-		query = "SELECT usuario_id, texto, id FROM mensagem WHERE usuario_id = " + usuario_id;
+	def carregarPorUsuariosIds(usuarios_ids):
+		query = "SELECT usuario_id, texto, id FROM mensagem ";
+
+		for i,usuario_id in enumerate(usuarios_ids,start=0):
+			if(i==0):
+				query += "WHERE usuario_id=" + usuario_id + " ";
+			else:
+				query += "OR usuario_id=" + usuario_id + " ";
+
+		query += "ORDER BY id"
 
 		con = Conexao()
 		result = con.carregar(query)
