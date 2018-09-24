@@ -45,8 +45,17 @@ def home():
 	if(usuario_id is None):
 		retorno["status"] = 0
 		retorno["texto_status"] = "Parametros invalidos"
+	else:
+
+		url_perfil_user = os.environ.get('USER_PROFILE_URL', 'https://twitterlight-mensagens.herokuapp.com/consultarporusuario')
+		url_mensagens_user += "?usuario_id=" + usuario_id
+		result = requests.get(url_mensagens_user)
+		result_json = json.loads(result.text)
+
+		mensagens = None
 
 	#TODO
+
 
 
 	#else:	

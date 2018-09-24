@@ -122,17 +122,17 @@ def parar_seguir():
 
 
 @app.route("/perfil")
-def buscar_usuario():
-	id = request.args.get('id')
+def perfil():
+	usuario_id = request.args.get('usuario_id')
 
 	retorno = {}
-	if(id is None):
+	if(usuario_id is None):
 		retorno["status"] = 0
-		retorno["user_status"] = "Parametros invalidos"
+		retorno["texto_status"] = "Parametros invalidos"	
 
 	else:	
-		user = User.buscarPorId(id)
-		seg = Seguidores.numSeguidores(id)
+		user = User.buscarPorId(usuario_id)
+		seg = Seguidores.numSeguidores(usuario_id)
 		
 		
 		if user is None:
@@ -140,11 +140,15 @@ def buscar_usuario():
 			retorno["user_status"] = "Usuario nao encontrado"
 
 		else:
+
+			seguindo = Seguidores.buscarPorIdSeguidor(user.id)
+
 			retorno["status"] = 1
 			retorno["user_status"] = "Usuario encontrado"
-			retorno["Usuario"] = user.__dict__
-			retorno["Seguindo"] = seg.numSeguindo
-			retorno["Seguidores"] = seg.numSeguidores
+			retorno["usuario"] = user.__dict__
+			retorno["numero_seguindo"] = seg.numSeguindo
+			retorno["numero_seguidores"] = seg.numSeguidores
+			retorno["seguindo"] = [ob.seguido for ob in seguindo]
 	return json.dumps(retorno)
 
 

@@ -110,12 +110,27 @@ class Seguidores:
 
 	@staticmethod
 	def buscar(id_seguidor, id_seguido):
-		query = "SELECT idseguidor, idseguido FROM Seguidores WHERE idseguidor = " + id_seguidor + " AND idseguido = " + id_seguido +";"
+		query = "SELECT idseguidor, idseguido FROM Seguidores WHERE idseguidor = " + str(id_seguidor) + " AND idseguido = " + str(id_seguido) +";"
 
 		con = Conexao()
 		result = con.carregar(query)
 
 		if result is not None:
 			return Seguidores(result[0][0], result[0][1])
+		else:
+			return None
+
+	@staticmethod
+	def buscarPorIdSeguidor(id_seguidor):
+		query = "SELECT idseguidor, idseguido FROM Seguidores WHERE idseguidor = " + str(id_seguidor) +";"
+
+		con = Conexao()
+		result = con.carregar(query)
+
+		retorno = []
+		if result is not None:
+			for r in result:
+				retorno.append(Seguidores(r[0], r[1]))
+			return retorno
 		else:
 			return None
