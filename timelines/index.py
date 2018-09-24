@@ -10,6 +10,7 @@ app = Flask(__name__)
 def index():
     return "<h1>Hello World</h1>"
 
+#recebe o id de um usuário e retorna todas as suas mensagens
 @app.route("/posts")
 def posts():
 	usuario_id 	= request.args.get('usuario_id')
@@ -27,15 +28,15 @@ def posts():
 	retorno = {}
 	if mensagens is None:
 		retorno["status"] = 0
-		retorno["mensagem_status"] = "Nenhuma mensagem encontrada"
+		retorno["texto_status"] = "Nenhuma mensagem encontrada"
 
 	else:
 		retorno["status"] = 1
-		retorno["mensagem_status"] = "Mensagens encontradas"
+		retorno["texto_status"] = "Mensagens encontradas"
 		retorno["mensagens"] = mensagens
 	return json.dumps(retorno)
 
-
+#recebe o id de um usuario e retorna todas as suas mensagens e dos usuários que ele segue
 @app.route("/home")
 def home():
 	usuario_id = request.args.get('usuario_id')
@@ -43,17 +44,20 @@ def home():
 	retorno = {}
 	if(usuario_id is None):
 		retorno["status"] = 0
-		retorno["mensagem_status"] = "Parametros invalidos"
+		retorno["texto_status"] = "Parametros invalidos"
+
+	#TODO
+
 
 	#else:	
 		#mensagem = Mensagem.carregarPorId(id)
 		#if mensagem is None:
 		#	retorno["status"] = 0
-		#	retorno["mensagem_status"] = "Mensagem nao encontrada"
+		#	retorno["texto_status"] = "Mensagem nao encontrada"
 
 		#else:
 		#	retorno["status"] = 1
-		#	retorno["mensagem_status"] = "Mensagem encontrada"
+		#	retorno["texto_status"] = "Mensagem encontrada"
 		#	retorno["mensagem"] = mensagem.__dict__
 	return json.dumps(retorno)
 

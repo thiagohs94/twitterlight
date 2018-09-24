@@ -52,3 +52,19 @@ class Conexao:
             return None
         else:
             return linhas
+
+    def deletar(self, query):
+        self.conectar()
+
+        if self.conn is not None:
+
+            try:
+                cur = self.conn.cursor()
+                cur.execute(query)
+                self.conn.commit()
+            except (Exception, psycopg2.DatabaseError) as error:
+                return 0
+
+        self.fechar()
+
+        return 1

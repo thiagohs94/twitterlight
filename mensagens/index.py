@@ -21,18 +21,18 @@ def enviar_mensagem():
 	retorno = {}
 	if(usuario_id is None or texto is None):
 		retorno["status"] = 0
-		retorno["mensagem_status"] = "Parametros invalidos"
+		retorno["texto_status"] = "Parametros invalidos"
 	else:		
 		mensagem = Mensagem(usuario_id, texto)
 		mensagem.salvar()
 
 		if(mensagem.id is None):
 			retorno["status"] = 0
-			retorno["mensagem_status"] = "Mensagem nao enviada"
+			retorno["texto_status"] = "Mensagem nao enviada"
 
 		else:
 			retorno["status"] = 1
-			retorno["mensagem_status"] = "Mensagem enviada"
+			retorno["texto_status"] = "Mensagem enviada"
 			retorno["mensagem"] = mensagem.__dict__
 
 	return json.dumps(retorno)
@@ -44,17 +44,17 @@ def consultar_mensagem():
 	retorno = {}
 	if(id is None):
 		retorno["status"] = 0
-		retorno["mensagem_status"] = "Parametros invalidos"
+		retorno["texto_status"] = "Parametros invalidos"
 
 	else:	
 		mensagem = Mensagem.carregarPorId(id)
 		if mensagem is None:
 			retorno["status"] = 0
-			retorno["mensagem_status"] = "Mensagem nao encontrada"
+			retorno["texto_status"] = "Mensagem nao encontrada"
 
 		else:
 			retorno["status"] = 1
-			retorno["mensagem_status"] = "Mensagem encontrada"
+			retorno["texto_status"] = "Mensagem encontrada"
 			retorno["mensagem"] = mensagem.__dict__
 	return json.dumps(retorno)
 
@@ -65,18 +65,18 @@ def consultar_mensagem_por_usuario():
 	retorno = {}
 	if(usuario_id is None):
 		retorno["status"] = 0
-		retorno["mensagem_status"] = "Parametros invalidos"
+		retorno["texto_status"] = "Parametros invalidos"
 
 	else:	
 		mensagens = Mensagem.carregarPorUsuariosIds(usuario_id)
 
 		if mensagens is None:
 			retorno["status"] = 0
-			retorno["mensagem_status"] = "Nenhuma mensagem encontrada"
+			retorno["texto_status"] = "Nenhuma mensagem encontrada"
 
 		else:
 			retorno["status"] = 1
-			retorno["mensagem_status"] = "Mensagens encontradas"
+			retorno["texto_status"] = "Mensagens encontradas"
 			retorno["mensagens"] = [ob.__dict__ for ob in mensagens]
 	return json.dumps(retorno)
 
