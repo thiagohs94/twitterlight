@@ -28,14 +28,17 @@ class Conexao:
 
         id = None
         if self.conn is not None:
-            cur = self.conn.cursor()
-            cur.execute(query)
-            id = cur.fetchone()[0]
 
-            self.conn.commit()
+            try:
+                cur = self.conn.cursor()
+                cur.execute(query)
+                id = cur.fetchone()[0]
 
-        self.fechar()
-        return id
+                self.conn.commit()
+                self.fechar()
+                return id
+            except (Exception, psycopg2.DatabaseError) as error:
+                return None
 
     def carregar(self, query):
         self.conectar()

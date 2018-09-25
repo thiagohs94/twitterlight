@@ -38,7 +38,7 @@ class Conexao:
                 self.fechar()
                 return id
             except (Exception, psycopg2.DatabaseError) as error:
-                return 0
+                return None
 
     def carregar(self, query):
         self.conectar()
