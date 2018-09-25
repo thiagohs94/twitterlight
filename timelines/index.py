@@ -49,6 +49,7 @@ def home():
 
 		url_perfil_user = os.environ.get('USER_PROFILE_URL', 'https://twitterlight-usuarios.herokuapp.com/perfil')
 		url_perfil_user += "?usuario_id=" + usuario_id
+		return url_perfil_user
 		result = requests.get(url_perfil_user)
 		result_json = json.loads(result.text)
 

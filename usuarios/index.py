@@ -141,6 +141,8 @@ def perfil():
 		else:
 
 			seguindo = Seguidores.buscarPorIdSeguidor(user.id)
+			if(seguindo is None):
+				seguindo = {}
 
 			retorno["status"] = 1
 			retorno["user_status"] = "Usuario encontrado"
