@@ -35,6 +35,21 @@ class User:
 			return User(result[0][0], result[0][1], result[0][2], result[0][3], result[0][4] )
 		else:
 			return None
+
+	@staticmethod
+	def buscarTodos():
+		query = "SELECT username, senha, nome, bio, id FROM Users;"
+
+		con = Conexao()
+		result = con.carregar(query)
+
+		retorno = []
+		if result is not None:
+			for r in result:
+				retorno.append(User(r[0], r[1], r[2], r[3], r[4]))
+			return retorno
+		else:
+			return None
 			
 	@staticmethod
 	def atualizarNome(id, nome):
@@ -131,6 +146,21 @@ class Seguidores:
 		if result is not None:
 			for r in result:
 				retorno.append(Seguidores(r[0], r[1]))
+			return retorno
+		else:
+			return None
+
+	@staticmethod
+	def buscarTodos():
+		query = "SELECT idseguidor, idseguido, id FROM Seguidores;"
+
+		con = Conexao()
+		result = con.carregar(query)
+
+		retorno = []
+		if result is not None:
+			for r in result:
+				retorno.append(Seguidores(r[0], r[1], None, None, r[2]))
 			return retorno
 		else:
 			return None

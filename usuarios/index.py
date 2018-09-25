@@ -150,6 +150,21 @@ def perfil():
 			retorno["seguindo"] = [ob.seguido for ob in seguindo]
 	return json.dumps(retorno)
 
+@app.route("/info")
+def info():
+	users = User.buscarTodos()
+	seguidores = Seguidores.buscarTodos()
+
+	retorno = "Usuarios (id, username, senha, nome, bio)"
+	for u in users:
+		retorno += "<br/> " + str(u.id) + ", " + str(u.username) + ", " + str(u.senha) + ", " + str(u.nome) + ", " + str(u.bio)
+
+	retorno += "<br/> <br/> Seguidores (idSeguidor, idSeguido)"
+	for s in seguidores:
+		retorno += "<br/> " + str(s.seguidor) + ", " + str(s.seguido)
+
+	return retorno
+
 
 
 if __name__ == "__main__":

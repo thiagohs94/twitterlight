@@ -80,6 +80,15 @@ def consultar_mensagem_por_usuario():
 			retorno["mensagens"] = [ob.__dict__ for ob in mensagens]
 	return json.dumps(retorno)
 
+@app.route("/info")
+def info():
+	mensagens = Mensagem.carregarTodos()
+
+	retorno = "Mensagens (id, usuario_id, texto)"
+	for m in mensagens:
+		retorno += "<br/> " + str(m.id) + ", " + str(m.usuario_id) + ", " + str(m.texto)
+
+	return retorno
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
