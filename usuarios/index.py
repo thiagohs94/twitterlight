@@ -89,7 +89,6 @@ def seguir():
 		else:
 			retorno["status"] = 1
 			retorno["texto_status"] = "Seguindo"
-			retorno["usuario"] = seg.__dict__
 	return json.dumps(retorno) 
 
 @app.route("/pararseguir")
