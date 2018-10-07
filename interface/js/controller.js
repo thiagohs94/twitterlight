@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $.ajax({
     	type: "GET",
-        url: "http://twitterlight-timelines.herokuapp.com/posts?usuario_id=11",
+        url: "http://0.0.0.0:5000/posts?usuario_id=11",
     	dataType: "json"
     }).then(function(data) {
     	console.log(data); 	

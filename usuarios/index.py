@@ -4,8 +4,10 @@ from flask import Flask
 from flask import request
 from model import User
 from model import Seguidores
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 def obj_dict(obj):
     return obj.__dict__

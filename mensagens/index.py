@@ -2,9 +2,11 @@ import os
 import json
 from flask import Flask
 from flask import request
+from flask_cors import CORS
 from model import Mensagem
 
 app = Flask(__name__)
+CORS(app)
 
 def obj_dict(obj):
     return obj.__dict__
