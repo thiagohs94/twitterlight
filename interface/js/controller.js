@@ -4,7 +4,7 @@ var mensagens = [];
 function carregarMensagens(id){
     $.ajax({
     	type: "GET",
-        url: "http://0.0.0.0:5000/posts?usuario_id=" + id,
+        url: "http://0.0.0.0:5000/home?usuario_id=" + id,
     	dataType: "json"
     })
 	.done(function(data) {
@@ -22,7 +22,7 @@ function carregarMensagens(id){
 			return null;
 		}
 	})
-	.fail(function() {
+	.fail(function(data) {
 		console.log(data);
 		return null;
 	})
@@ -31,7 +31,7 @@ function carregarMensagens(id){
 function exibirMensagem(mensagem){
 	//$("#main-timeline").append("olar");
 	var template = $("#template-mensagem").clone(true).attr("id", "msg-" + mensagem.id);
-	template.find("#msg-usuario").html(mensagem.usuario_id);
+	template.find("#msg-usuario").html(mensagem.usuario.nome);
 	template.find("#msg-texto").html(mensagem.texto);
     $("#main-timeline").append(template);
     $("#msg-" + mensagem.id).show();
