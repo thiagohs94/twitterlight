@@ -31,7 +31,7 @@ class User:
 		con = Conexao()
 		result = con.carregar(query)
 
- 		if result is not None:
+		if result is not None:
 			return User(result[0][0], result[0][1], result[0][2], result[0][3], result[0][4])
 		else:
 			return None
