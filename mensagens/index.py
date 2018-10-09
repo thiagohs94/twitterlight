@@ -71,6 +71,19 @@ def consultar_mensagem_por_usuario():
 
 	else:	
 		mensagens = Mensagem.carregarPorUsuariosIds(usuario_id)
+		msgs = [ob.__dict__ for ob in mensagens]
+
+		for m in msgs:
+
+			#obter informacoes do usuario 
+			url_consultar_user = os.environ.get('USER_PROFILE_URL', 'https://twitterlight-usuarios.herokuapp.com/consultar')
+			url_consultar_user += "?usuario_id=" + usuario_id
+			result = requests.get(url_consultar_user)
+			result_json = json.loads(result.text)
+
+			if(result_json["status"] == 1):
+				m["usuario"] = result_json["usuario"]
+
 
 		if mensagens is None:
 			retorno["status"] = 0
@@ -79,7 +92,7 @@ def consultar_mensagem_por_usuario():
 		else:
 			retorno["status"] = 1
 			retorno["texto_status"] = "Mensagens encontradas"
-			retorno["mensagens"] = [ob.__dict__ for ob in mensagens]
+			retorno["mensagens"] = msgs
 	return json.dumps(retorno)
 
 @app.route("/info")
