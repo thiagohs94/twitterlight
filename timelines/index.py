@@ -51,11 +51,11 @@ def home():
 
 		url_perfil_user = os.environ.get('USER_PROFILE_URL', 'https://twitterlight-usuarios.herokuapp.com/perfil')
 		url_perfil_user += "?usuario_id=" + usuario_id
-		return str(url_perfil_user)
+
 		result = requests.get(url_perfil_user)
 		result_json = json.loads(result.text)
 
-		return str(url_perfil_user) + str(result_json)
+		#return str(url_perfil_user) + str(result_json)
 		if(result_json["status"] == 1):
 			usuarios = result_json["seguindo"]
 
@@ -67,7 +67,7 @@ def home():
 			result = requests.get(url_home_user)
 			result_json = json.loads(result.text)
 
-			return url_home_user + str(result_json)
+			#return url_home_user + str(result_json)
 		mensagens = None
 
 		if(result_json["status"] == 1):
