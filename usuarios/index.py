@@ -44,23 +44,23 @@ def cadastrar_usuario():
 
 @app.route("/consultar")
 def consultar_usuario():
-	id = request.args.get('id')
+	ids = request.args.getlist('id')
 
 	retorno = {}
-	if(id is None):
+	if(ids is None):
 		retorno["status"] = 0
 		retorno["texto_status"] = "Parametros invalidos"
 
 	else:	
-		usuario = User.buscarPorId(id)
-		if usuario is None:
+		usuarios = User.buscarPorId(ids)
+		if usuarios is None:
 			retorno["status"] = 0
 			retorno["texto_status"] = "Usuario nao encontrado"
 
 		else:
 			retorno["status"] = 1
 			retorno["texto_status"] = "Usuario encontrado"
-			retorno["usuario"] = usuario.__dict__
+			retorno["usuarios"] = [u.__dict__ for u in usuarios]
 	return json.dumps(retorno)
 
 @app.route("/remover")

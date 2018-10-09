@@ -88,10 +88,12 @@ def consultar_mensagem_por_usuario():
 			result = requests.get(url_consultar_user)
 			result_json = json.loads(result.text)
 
-			for m in msgs:			
+			if(result_json["status"] == 1):
 
-				if(result_json["status"] == 1):
-					m["usuario"] = result_json["usuario"]
+				for m in msgs:
+					for u in result_json["usuario"]:
+						if(u["id"] == m["usuario_id"]):
+							m["usuario"] = result_json["usuario"]
 
 			retorno["status"] = 1
 			retorno["texto_status"] = "Mensagens encontradas"

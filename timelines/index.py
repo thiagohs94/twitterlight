@@ -54,16 +54,15 @@ def home():
 		result = requests.get(url_perfil_user)
 		result_json = json.loads(result.text)
 
-		usuarios = [usuario_id]
 		if(result_json["status"] == 1):
-			usuarios = usuarios + result_json["seguindo"]
+			usuarios = result_json["seguindo"]
 
-		url_perfil_user = os.environ.get('USER_MESSAGES_URL', 'https://twitterlight-mensagens.herokuapp.com/consultarporusuario')
-		url_perfil_user += "?"
+		url_home_user = os.environ.get('USER_MESSAGES_URL', 'https://twitterlight-mensagens.herokuapp.com/consultarporusuario')
+		url_home_user += "?usuario_id=" + str(usuario_id) + "&"
 		for u in usuarios:
-			url_perfil_user += "usuario_id=" + str(u) + "&"
-
-		result = requests.get(url_perfil_user)
+			url_home_user += "usuario_id=" + str(u["id"]) + "&"
+			
+		result = requests.get(url_home_user)
 		result_json = json.loads(result.text)
 
 		mensagens = None
