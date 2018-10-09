@@ -11,7 +11,7 @@ class Conexao:
 
     def conectar(self):
         try:
-            url = urlparse(os.environ.get('DATABASE_URL', 'postgres://postgres:postgres@localhost:5432/mensagens'))
+            url = urlparse(os.environ.get('DATABASE_URL', 'postgres://ktythxpeortqxa:872d1c6640d58dfcb8148f8e9e49b39b7331663716fce2d49c44c816456cf70e@ec2-54-83-29-34.compute-1.amazonaws.com:5432/d7jnd654md71uj'))
             db = "dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname)
             self.conn   = psycopg2.connect(db)
             
