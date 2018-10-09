@@ -11,7 +11,7 @@ function carregarMensagens(id){
 		console.log(data);
 		if(data.status == 1 && data.hasOwnProperty("mensagens")){
 			mensagens = data.mensagens;
-			console.log("mensagens");
+			console.log("mensagens"); 
 			console.log(mensagens);
 
 			for(i=0;i<mensagens.length;i++){
@@ -32,7 +32,7 @@ function exibirMensagem(mensagem){
 	//$("#main-timeline").append("olar");
 	var template = $("#template-mensagem").clone(true).attr("id", "msg-" + mensagem.id);
 	template.find("#msg-usuario").html(mensagem.usuario_id);
-	template.find("#msg-texto").html(mensagem.msg-texto);
+	template.find("#msg-texto").html(mensagem.texto);
     $("#main-timeline").append(template);
     $("#msg-" + mensagem.id).show();
 }

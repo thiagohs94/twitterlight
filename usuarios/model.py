@@ -26,7 +26,7 @@ class User:
 
 	@staticmethod
 	def buscarPorId(id):
-		query = "SELECT username, senha, nome, bio, id FROM Users WHERE id = " + id + ';';
+		query = "SELECT username, senha, nome, bio, id FROM Users WHERE id = " + str(id) + ';';
 
 		con = Conexao()
 		result = con.carregar(query)
@@ -53,8 +53,8 @@ class User:
 			
 	@staticmethod
 	def atualizarNome(id, nome):
-		update = "UPDATE Users SET nome = '" + nome + "' WHERE id = " + id + ';';
-		query = "SELECT username, senha, nome, bio, id FROM Users WHERE id = " + id + ';';
+		update = "UPDATE Users SET nome = '" + nome + "' WHERE id = " + str(id) + ';';
+		query = "SELECT username, senha, nome, bio, id FROM Users WHERE id = " + str(id) + ';';
 
 		con = Conexao()
 		con.carregar(update)
@@ -67,8 +67,8 @@ class User:
 			
 	@staticmethod
 	def atualizarBio(id, bio):
-		update = "UPDATE Users SET bio = '" + bio + "' WHERE id = " + id + ';';
-		query = "SELECT username, senha, nome, bio, id FROM Users WHERE id = " + id + ';';
+		update = "UPDATE Users SET bio = '" + bio + "' WHERE id = " + str(id) + ';';
+		query = "SELECT username, senha, nome, bio, id FROM Users WHERE id = " + str(id) + ';';
 
 		con = Conexao()
 		con.carregar(update)

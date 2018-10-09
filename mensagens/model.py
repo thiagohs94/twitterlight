@@ -7,7 +7,7 @@ class Mensagem:
 		self.texto = texto
 
 	def salvar(self):
-		query = "INSERT INTO mensagem(usuario_id, texto) VALUES ('" + self.usuario_id +"','" + self.texto + "') RETURNING id;"
+		query = "INSERT INTO mensagem(usuario_id, texto) VALUES ('" + str(self.usuario_id) +"','" + self.texto + "') RETURNING id;"
 
 		con = Conexao()
 		id = con.inserir(query)
@@ -16,7 +16,7 @@ class Mensagem:
 
 	@staticmethod
 	def carregarPorId(id):
-		query = "SELECT usuario_id, texto, id FROM mensagem WHERE id = " + id;
+		query = "SELECT usuario_id, texto, id FROM mensagem WHERE id = " + str(id);
 
 		con = Conexao()
 		result = con.carregar(query)
@@ -32,9 +32,9 @@ class Mensagem:
 
 		for i,usuario_id in enumerate(usuarios_ids,start=0):
 			if(i==0):
-				query += "WHERE usuario_id=" + usuario_id + " ";
+				query += "WHERE usuario_id=" + str(usuario_id) + " ";
 			else:
-				query += "OR usuario_id=" + usuario_id + " ";
+				query += "OR usuario_id=" + str(usuario_id) + " ";
 
 		query += "ORDER BY id"
 

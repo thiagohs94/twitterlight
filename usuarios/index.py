@@ -135,23 +135,23 @@ def perfil():
 		user = User.buscarPorId(usuario_id)
 		seg = Seguidores.numSeguidores(usuario_id)
 		
-		
 		if user is None:
 			retorno["status"] = 0
 			retorno["user_status"] = "Usuario nao encontrado"
 
 		else:
-
+			users_seguindo 	= {} 
 			seguindo = Seguidores.buscarPorIdSeguidor(user.id)
-			if(seguindo is None):
-				seguindo = {}
+
+			if(seguindo is not None):
+				users_seguindo = [User.buscarPorId(s.seguido) for s in seguindo]
 
 			retorno["status"] = 1
 			retorno["user_status"] = "Usuario encontrado"
 			retorno["usuario"] = user.__dict__
 			retorno["numero_seguindo"] = seg.numSeguindo
 			retorno["numero_seguidores"] = seg.numSeguidores
-			retorno["seguindo"] = [ob.seguido for ob in seguindo]
+			retorno["seguindo"] = [ob.__dict__ for ob in users_seguindo]
 	return json.dumps(retorno)
 
 @app.route("/info")
