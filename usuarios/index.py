@@ -52,7 +52,7 @@ def consultar_usuario():
 		retorno["texto_status"] = "Parametros invalidos"
 
 	else:	
-		usuarios = User.buscarPorId(ids)
+		usuarios = User.buscarMuitosPorId(ids)
 		if usuarios is None:
 			retorno["status"] = 0
 			retorno["texto_status"] = "Usuario nao encontrado"

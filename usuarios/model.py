@@ -25,7 +25,17 @@ class User:
 		return result
 
 	@staticmethod
-	def buscarPorId(ids):
+	def buscarPorId(id):
+		query = "SELECT username, senha, nome, bio, id FROM Users WHERE id = " + id + ';';
+ 		con = Conexao()
+		result = con.carregar(query)
+ 		if result is not None:
+			return User(result[0][0], result[0][1], result[0][2], result[0][3], result[0][4] )
+		else:
+			return None
+
+	@staticmethod
+	def buscarMuitosPorId(ids):
 		query = "SELECT username, senha, nome, bio, id FROM Users WHERE "
 
 		for i,usuario_id in enumerate(ids,start=0):
