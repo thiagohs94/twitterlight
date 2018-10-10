@@ -1,13 +1,40 @@
 //timeline
 var mensagens = [];
 
-function carregarMensagens(id){
+function carregarUsuario(id){
+	console.log("carregarUsuario");
+	exibirLoading();
     $.ajax({
     	type: "GET",
-        url: "http://0.0.0.0:5000/home?usuario_id=" + id,
+        url: "http://twitterlight-usuarios.herokuapp.com/perfil?usuario_id=" + id,
     	dataType: "json"
     })
 	.done(function(data) {
+		console.log(data);
+		if(data.status == 1 && data.hasOwnProperty("usuario")){
+			exibirInfoUsuario(data.usuario);
+			carregarMensagens(id);
+		}
+		else{
+			return null;
+		}
+	})
+	.fail(function(data) {
+		esconderLoading();
+		console.log(data);
+		return null;
+	})
+}
+
+function carregarMensagens(id){
+	console.log("carregarMensagens");
+    $.ajax({
+    	type: "GET",
+        url: "http://twitterlight-timelines.herokuapp.com/home?usuario_id=" + id,
+    	dataType: "json"
+    })
+	.done(function(data) {
+		esconderLoading();
 		console.log(data);
 		if(data.status == 1 && data.hasOwnProperty("mensagens")){
 			mensagens = data.mensagens;
@@ -23,9 +50,16 @@ function carregarMensagens(id){
 		}
 	})
 	.fail(function(data) {
+		esconderLoading();
 		console.log(data);
 		return null;
 	})
+}
+
+function exibirInfoUsuario(usuario){
+    $("#nome-usuario").append(usuario.nome);
+    $("#username-usuario").append("@" + usuario.username);
+    $("#bio-usuario").append(usuario.bio);
 }
 
 function exibirMensagem(mensagem){
@@ -37,10 +71,21 @@ function exibirMensagem(mensagem){
     $("#msg-" + mensagem.id).show();
 }
 
+function exibirLoading(){
+	$('.overlay').show();
+    $('.loading').show();
+}
+
+function esconderLoading(){
+	$('.overlay').hide();
+    $('.loading').hide();
+}
+
 $(document).ready(function() {
+	console.log("start")
 	var user_id = localStorage.getItem("user_id");
 
 	if (user_id != null){
-		carregarMensagens(user_id);
+		carregarUsuario(user_id);
 	}
 })
