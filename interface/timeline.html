@@ -61,8 +61,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
          <h4 id="nome-usuario" class="w3-center"></h4>
          <p class="w3-center"><img src="w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
          <hr>
-         <p id="username-usuario"><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i></p>
-         <p id="bio-usuario"><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i></p>
+         <p id="username-usuario"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i></p>
+         <p id="bio-usuario"><i class="fa fa-comment fa-fw w3-margin-right w3-text-theme"></i></p>
         </div>
       </div>
       <br>
@@ -150,8 +150,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
               <h6 class="w3-opacity">Envie um novo tweet:</h6>
-              <p contenteditable="true" class="w3-border w3-padding"> O que está acontecendo?</p>
-              <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Tweetar</button> 
+              <p id="txtMensagem" contenteditable="true" class="w3-border w3-padding"> O que está acontecendo?</p>
+              <button type="button" onclick="botaoEnviarMensagemClick()" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Tweetar</button> 
             </div>
           </div>
         </div>

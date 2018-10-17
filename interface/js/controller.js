@@ -56,6 +56,39 @@ function carregarMensagens(id){
 	})
 }
 
+function enviarMensagem(id_usuario, texto){
+	console.log("carregarMensagens");
+    $.ajax({
+    	type: "GET",
+        url: "http://twitterlight-mensagens.herokuapp.com/enviar?usuario_id=" + id_usuario + "&texto=" + texto,
+    	dataType: "json"
+    })
+	.done(function(data) {
+		esconderLoading();
+		console.log(data);
+		
+		if(data.status == 1){
+			location.reload(); 	
+			/*
+			mensagens = data.mensagens;
+			console.log("mensagens"); 
+			console.log(mensagens);
+
+			for(i=0;i<mensagens.length;i++){
+				exibirMensagem(mensagens[i]);
+			}*/
+		}
+		else{
+			return null;
+		}
+	})
+	.fail(function(data) {
+		esconderLoading();
+		console.log(data);
+		return null;
+	})
+}
+
 function exibirInfoUsuario(usuario){
     $("#nome-usuario").append(usuario.nome);
     $("#username-usuario").append("@" + usuario.username);
@@ -81,11 +114,31 @@ function esconderLoading(){
     $('.loading').hide();
 }
 
+function botaoEnviarMensagemClick(){
+	var id_usuario = localStorage.getItem("user_id");
+	var texto = $("#txtMensagem").text();
+	
+	console.log("enviar mensagem");
+	console.log(id_usuario);
+	console.log(texto);
+	
+	enviarMensagem(id_usuario, texto);
+}
+
 $(document).ready(function() {
 	console.log("start")
+	
+	$( "#txtMensagem" ).click(function() {
+		$("#txtMensagem").text("");
+	});
+	
+	//teste
+	localStorage.setItem("user_id", 11);
 	var user_id = localStorage.getItem("user_id");
 
 	if (user_id != null){
 		carregarUsuario(user_id);
 	}
+	
+	
 })
