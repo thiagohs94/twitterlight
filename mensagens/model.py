@@ -36,7 +36,7 @@ class Mensagem:
 			else:
 				query += "OR usuario_id=" + str(usuario_id) + " ";
 
-		query += "ORDER BY id"
+		query += "ORDER BY id DESC"
 
 		con = Conexao()
 		result = con.carregar(query)
@@ -51,7 +51,7 @@ class Mensagem:
 
 	@staticmethod
 	def carregarTodos():
-		query = "SELECT usuario_id, texto, id FROM mensagem;"
+		query = "SELECT usuario_id, texto, id FROM mensagem ORDER BY id DESC;"
 
 		con = Conexao()
 		result = con.carregar(query)

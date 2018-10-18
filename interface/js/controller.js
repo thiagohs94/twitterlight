@@ -13,7 +13,12 @@ function carregarUsuario(id){
 		console.log(data);
 		if(data.status == 1 && data.hasOwnProperty("usuario")){
 			exibirInfoUsuario(data.usuario);
-			carregarMensagens(id);
+			if($('#txtMensagem').length){
+				carregarTimeline(id);
+			}
+			else{
+				carregarPosts(id);
+			}
 		}
 		else{
 			return null;
@@ -26,8 +31,8 @@ function carregarUsuario(id){
 	})
 }
 
-function carregarMensagens(id){
-	console.log("carregarMensagens");
+function carregarTimeline(id){
+	console.log("carregarTimeline");
     $.ajax({
     	type: "GET",
         url: "http://twitterlight-timelines.herokuapp.com/home?usuario_id=" + id,
@@ -56,8 +61,38 @@ function carregarMensagens(id){
 	})
 }
 
+function carregarPosts(id){
+	console.log("carregarPosts");
+    $.ajax({
+    	type: "GET",
+        url: "http://twitterlight-timelines.herokuapp.com/posts?usuario_id=" + id,
+    	dataType: "json"
+    })
+	.done(function(data) {
+		esconderLoading();
+		console.log(data);
+		if(data.status == 1 && data.hasOwnProperty("mensagens")){
+			mensagens = data.mensagens;
+			console.log("mensagens"); 
+			console.log(mensagens);
+
+			for(i=0;i<mensagens.length;i++){
+				exibirMensagem(mensagens[i]);
+			}
+		}
+		else{
+			return null;
+		}
+	})
+	.fail(function(data) {
+		esconderLoading();
+		console.log(data);
+		return null;
+	})
+}
+
 function enviarMensagem(id_usuario, texto){
-	console.log("carregarMensagens");
+	console.log("enviarMensagem");
     $.ajax({
     	type: "GET",
         url: "http://twitterlight-mensagens.herokuapp.com/enviar?usuario_id=" + id_usuario + "&texto=" + texto,
@@ -128,7 +163,7 @@ function botaoEnviarMensagemClick(){
 $(document).ready(function() {
 	console.log("start")
 	
-	$( "#txtMensagem" ).click(function() {
+	$("#txtMensagem" ).click(function() {
 		$("#txtMensagem").text("");
 	});
 	
@@ -139,6 +174,5 @@ $(document).ready(function() {
 	if (user_id != null){
 		carregarUsuario(user_id);
 	}
-	
 	
 })
