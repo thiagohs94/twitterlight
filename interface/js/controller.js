@@ -134,6 +134,7 @@ function exibirMensagem(mensagem){
 	//$("#main-timeline").append("olar");
 	var template = $("#template-mensagem").clone(true).attr("id", "msg-" + mensagem.id);
 	template.find("#msg-usuario").html(mensagem.usuario.nome);
+	template.find("#msg-link-perfil-usuario").attr("href", "./perfil.html?id_usuario="+mensagem.usuario.id);
 	template.find("#msg-username").html("@" + mensagem.usuario.username);
 	template.find("#msg-texto").html(mensagem.texto);	
     $("#main-timeline").append(template);
@@ -171,6 +172,14 @@ $(document).ready(function() {
 	//teste
 	localStorage.setItem("user_id", 11);
 	var user_id = localStorage.getItem("user_id");
+
+	if(!$('#txtMensagem').length && window.location.search != ""){
+		var id = window.location.search.substr(1).split("=")[1];
+		if(Math.floor(id) == id && $.isNumeric(id)){
+			console.log("perfil do user" + id); 
+			user_id = id
+		}
+	}	
 
 	if (user_id != null){
 		carregarUsuario(user_id);
