@@ -38,3 +38,20 @@
     transform: rotate(360deg);
   }
 }
+
+a{
+  text-decoration: none;
+}
+
+.mensagem-usuario-nome {  
+  padding-right: 5px;
+  display:inline;
+
+}
+
+.mensagem-usuario-username{
+  font-size: 15px;
+  color: #657786;
+  display:inline;
+
+}

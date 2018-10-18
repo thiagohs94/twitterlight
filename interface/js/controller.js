@@ -134,7 +134,8 @@ function exibirMensagem(mensagem){
 	//$("#main-timeline").append("olar");
 	var template = $("#template-mensagem").clone(true).attr("id", "msg-" + mensagem.id);
 	template.find("#msg-usuario").html(mensagem.usuario.nome);
-	template.find("#msg-texto").html(mensagem.texto);
+	template.find("#msg-username").html("@" + mensagem.usuario.username);
+	template.find("#msg-texto").html(mensagem.texto);	
     $("#main-timeline").append(template);
     $("#msg-" + mensagem.id).show();
 }
