@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask
+from flask import Flask, render_template
 from flask import request
 from model import User
 from model import Seguidores
@@ -14,7 +14,8 @@ def obj_dict(obj):
 
 @app.route("/")
 def index():
-    return "<h1>Hello World</h1>"
+    return render_template('Perfil.html')
+
 
 @app.route("/cadastro")
 def cadastrar_usuario():
@@ -39,6 +40,7 @@ def cadastrar_usuario():
 			retorno["status"] = 1
 			retorno["texto_status"] = "Usuario cadastrado"
 			retorno["usuario"] = user.__dict__
+			return render_template('PerfilUser.html', Usuario=user)
 
 	return json.dumps(retorno)
 
@@ -61,6 +63,7 @@ def consultar_usuario():
 			retorno["status"] = 1
 			retorno["texto_status"] = "Usuario encontrado"
 			retorno["usuarios"] = [u.__dict__ for u in usuarios]
+			return render_template('PerfilUser.html', Usuario=usuarios[0])
 	return json.dumps(retorno)
 
 @app.route("/remover")
@@ -87,6 +90,7 @@ def remover_usuario():
 			else:
 				retorno["status"] = 1
 				retorno["texto_status"] = "Usuario removido"
+				return render_template('Deletado.html')
 			
 	return json.dumps(retorno)
 
@@ -100,7 +104,8 @@ def seguir():
 		retorno["status"] = 0
 		retorno["texto_status"] = "Parametros invalidos"
 
-	else:	
+	else:
+		user = User.buscarPorId(seguidor)
 		seg = Seguidores(seguidor, seguido)
 		seg.salvar()
 		
@@ -111,6 +116,8 @@ def seguir():
 		else:
 			retorno["status"] = 1
 			retorno["texto_status"] = "Seguindo"
+			return render_template('Seguir.html', Usuario=user)
+			
 	return json.dumps(retorno) 
 
 @app.route("/pararseguir")
@@ -131,6 +138,7 @@ def parar_seguir():
 			retorno["texto_status"] = "relacao nao encontrada"
 		
 		else:
+			user = User.buscarPorId(seguidor)
 			r = seg.deletar()
 			if(r == 0):
 				retorno["status"] = 0
@@ -138,6 +146,7 @@ def parar_seguir():
 			else:
 				retorno["status"] = 1
 				retorno["texto_status"] = "Relacao removida"
+				return render_template('PararSeguir.html', Usuario=user)
 			
 	return json.dumps(retorno)
 
@@ -172,6 +181,8 @@ def perfil():
 			retorno["numero_seguindo"] = seg.numSeguindo
 			retorno["numero_seguidores"] = seg.numSeguidores
 			retorno["seguindo"] = [ob.__dict__ for ob in users_seguindo]
+			return render_template('PerfilUser.html', Usuario=user, Segs=seg )
+			
 	return json.dumps(retorno)
 
 @app.route("/info")
