@@ -20,50 +20,16 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 <div class="loading"> 
   <div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
 </div>
-<!-- Navbar -->
-<div class="w3-top">
- <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="./timeline.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-left"></i>
-    <img src="w3images/logo.png" alt="Twiiter Light" class="w3-left w3-margin-left" style="width:30px">
-  </a>
-  <a href="./perfil.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Perfil"><i class="fa fa-user"></i></a>
-  <a href="#" onclick="excluirContaClick()" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Excluir Conta"><i class="fa fa-trash"></i></a>
-  <a href="./index.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Sair"><i class="fa fa-sign-out"></i></a>
-  <!-- 
-  <div class="w3-dropdown-hover w3-hide-small">
-    <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i> <span class="w3-badge w3-right w3-small w3-green">3</span></button>     
-    <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-      <a href="#" class="w3-bar-item w3-button">One new friend request</a>
-      <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
-      <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
-    </div>
-  </div> 
-  -->
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
-    <img src="w3images/avatar3.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar">
-  </a>
- </div>
-</div>
 
-<!-- Navbar on small screens -->
-<!--
-<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
-</div>
--->
-
-<div id="timeline"></div>
+<div id="index"></div>
 <!-- Page Container -->
-<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:20px; margin-bottom: 30px;">    
   <!-- The Grid -->
   <div class="w3-row">
     <!-- Left Column -->
     <div class="w3-col m3">
       <!-- Profile -->
+      <!-- 
       <div class="w3-card w3-round w3-white">
         <div class="w3-container">
          <h4 id="nome-usuario" class="w3-center"></h4>
@@ -71,9 +37,20 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
          <hr>
          <p id="username-usuario"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i></p>
          <p id="bio-usuario"><i class="fa fa-comment fa-fw w3-margin-right w3-text-theme"></i></p>
+         
+           <div class="w3-row w3-opacity">
+            <div class="w3">
+              <button id="btn-follow" class="w3-button w3-block w3-green w3-section" onclick="botaoSeguirClick()" title="Accept"><i class="fa fa-check"></i> Seguir </button>
+            </div>
+            <div class="w3">
+              <button id="btn-unfollow" class="w3-button w3-block w3-red w3-section" onclick="botaoPararSeguirClick()" title="Decline"><i class="fa fa-remove"></i>   Deixar de Seguir</button>
+            </div>
+          </div>
+         
         </div>
       </div>
       <br>
+      -->
       
       <!--
 
@@ -151,8 +128,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     </div>
     
     <!-- Middle Column -->
-    <div id="main-timeline" class="w3-col m7">
-    
+    <div id="main-timeline" class="w3-col" >
+      <!--
       <div class="w3-row-padding">
         <div class="w3-col m12">
           <div class="w3-card w3-round w3-white">
@@ -164,21 +141,28 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
           </div>
         </div>
       </div>
+    -->
 
-      <div id="template-mensagem" class="w3-container w3-card w3-white w3-round w3-margin" style="display: none"><br>
-        <img src="w3images/avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-        <!-- <span class="w3-right w3-opacity">1 min</span>  -->
+      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+        <div style="text-align: center;">
+          <img src="w3images/logo.png" alt="Twiiter Light"  style="width:50px">
+          <h4> Twitter Light</h4>
+        </div>
+        <br> <br>
         
-        <h4>          
-          <a id="msg-link-perfil-usuario" href="./perfil.html?"> <div id="msg-usuario" class="mensagem-usuario-nome"></div> </a>
-          <div id="msg-username" class="mensagem-usuario-username"></div>          
-        </h4> 
-        <br>
-        <hr class="w3-clear">
-        <p><div id="msg-texto"> </div></p>
-        <!-- 
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> -->
+      
+          <label>Usuario </label>
+          <input id="usuario-login" class="w3-input" type="text">
+          <br>
+
+          <label>Senha </label>
+          <input class="w3-input" type="text">
+          <br> <br>
+
+          <button onclick="botaoLoginClick()" class="w3-btn w3-blue w3-block">Fazer Login </button>
+          <br> 
+          <button onclick="botaoCadastroClick()" class="w3-btn w3-ripple w3-black w3-block">Cadastrar </button>
+          <br><br>
       </div>
 
       <!-- area das mensagens -->      
