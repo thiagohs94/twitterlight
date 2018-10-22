@@ -6,7 +6,7 @@ function cadastrar(nome, bio, usuario, senha){
 	exibirLoading();
     $.ajax({
     	type: "GET",
-        url: "http://twitterlight-usuarios.herokuapp.com/cadastro?username=" + nome + "&senha=" + senha + "&nome=" + nome + "&bio=" + bio, 
+        url: "http://twitterlight-usuarios.herokuapp.com/cadastro?username=" + nome + "&senha=" + senha + "&nome=" + usuario + "&bio=" + bio, 
     	dataType: "json"
     })
 	.done(function(data) {
@@ -128,6 +128,7 @@ function carregarPosts(id){
 }
 
 function enviarMensagem(id_usuario, texto){
+	exibirLoading();
 	console.log("enviarMensagem");
     $.ajax({
     	type: "GET",
@@ -330,8 +331,6 @@ function botaoEnviarMensagemClick(){
 	var texto = $("#txtMensagem").text();
 	
 	console.log("enviar mensagem");
-	console.log(id_usuario);
-	console.log(texto);
 	
 	enviarMensagem(id_usuario, texto);
 }
