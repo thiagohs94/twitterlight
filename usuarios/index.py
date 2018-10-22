@@ -43,7 +43,7 @@ def cadastrar_usuario():
 	return json.dumps(retorno)
 
 @app.route("/cadastro_interface")
-def cadastrar_usuario():
+def cadastrar_usuario_interface():
 	username 	= request.args.get('username')
 	senha 		= request.args.get('senha')
 	nome 		= request.args.get('nome')
@@ -78,7 +78,8 @@ def consultar_usuario():
 		retorno["status"] = 0
 		retorno["texto_status"] = "Parametros invalidos"
 
-	else:	
+	else:
+
 		usuarios = User.buscarMuitosPorId(ids)
 		if usuarios is None:
 			retorno["status"] = 0
@@ -91,7 +92,7 @@ def consultar_usuario():
 	return json.dumps(retorno)
 
 @app.route("/consultar_interface")
-def consultar_usuario():
+def consultar_usuario_interface():
 	ids = request.args.getlist('id')
 
 	retorno = {}
@@ -141,7 +142,7 @@ def remover_usuario():
 	return json.dumps(retorno)
 
 @app.route("/remover_interface")
-def remover_usuario():
+def remover_usuario_interface():
 	id = request.args.get('usuario_id')
 
 	retorno = {}
@@ -192,7 +193,7 @@ def seguir():
 	return json.dumps(retorno) 
 
 @app.route("/seguir_interface")
-def seguir():
+def seguir_interface():
 	seguidor = request.args.get('seguidor')
 	seguido = request.args.get('seguido')
 
@@ -246,7 +247,7 @@ def parar_seguir():
 	return json.dumps(retorno)
 
 @app.route("/pararseguir_interface")
-def parar_seguir():
+def parar_seguir_interface():
 	seguidor = request.args.get('seguidor')
 	seguido = request.args.get('seguido')
 
@@ -309,7 +310,7 @@ def perfil():
 
 
 @app.route("/perfil_interface")
-def perfil():
+def perfil_interface():
 	usuario_id = request.args.get('usuario_id')
 
 	retorno = {}
