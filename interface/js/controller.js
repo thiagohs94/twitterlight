@@ -184,5 +184,4 @@ $(document).ready(function() {
 	if (user_id != null){
 		carregarUsuario(user_id);
 	}
-	
 })
