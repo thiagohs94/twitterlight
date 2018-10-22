@@ -6,7 +6,7 @@ function cadastrar(nome, bio, usuario, senha){
 	exibirLoading();
     $.ajax({
     	type: "GET",
-        url: "http://twitterlight-usuarios.herokuapp.com/cadastro?username=" + nome + "&senha=" + senha + "&nome=" + usuario + "&bio=" + bio, 
+        url: "http://twitterlight-usuarios.herokuapp.com/cadastro?username=" + usuario + "&senha=" + senha + "&nome=" + nome + "&bio=" + bio, 
     	dataType: "json"
     })
 	.done(function(data) {
