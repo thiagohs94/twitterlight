@@ -377,8 +377,8 @@ $(document).ready(function() {
 	}	
 
 	if($('#perfil').length || $('#timeline').length){
-		console.log("teste");
 		if (user_id != null){
+			console.log("carregar usuario" + user_id);
 			carregarUsuario(user_id);
 		}
 	}
