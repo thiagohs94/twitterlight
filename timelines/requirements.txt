@@ -6,11 +6,11 @@ Flask==1.0.2
 Flask-Cors==3.0.6
 idna==2.7
 itsdangerous==0.24
-Jinja2==2.10
+Jinja2>=2.10.1
 MarkupSafe==1.0
 pipenv==2018.7.1
 psycopg2==2.7.5
-requests==2.19.1
+requests>=2.20.0
 urllib3==1.23
 virtualenv==16.0.0
 virtualenv-clone==0.3.0
