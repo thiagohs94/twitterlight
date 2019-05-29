@@ -77,6 +77,8 @@ class User:
 		update = "UPDATE Users SET nome = '" + nome + "' WHERE id = " + str(id) + ';';
 		query = "SELECT username, senha, nome, bio, id FROM Users WHERE id = " + str(id) + ';';
 
+		print "teste"
+
 		con = Conexao()
 		con.carregar(update)
 		result = con.carregar(query)
